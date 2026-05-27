@@ -1,51 +1,154 @@
 @import "../../App.scss";
 
-.header-content{
-    min-height: 60vh;
-    .header-title{
-        font-size: 36px;
-        max-width: 600px;
+.home-page{
+    min-height: 100vh;
+}
 
-        @media screen and (max-width: 768px){
-            font-size: 28px;
+.home-hero{
+    background: radial-gradient(circle at top left, rgba(168, 77, 231, 0.28), transparent 32%), linear-gradient(135deg, $clr-dark-blue 0%, $clr-mid-blue 55%, $clr-purple 100%);
+    color: $clr-white;
+    padding: 96px 0 88px;
+
+    .home-hero-content{
+        max-width: 920px;
+    }
+
+    h1{
+        font-family: $font-family-rubik;
+        font-size: clamp(3.8rem, 7vw, 7.2rem);
+        line-height: 1.05;
+        max-width: 820px;
+        margin: 12px 0 20px;
+    }
+
+    .hero-copy{
+        max-width: 640px;
+        font-size: 2rem;
+        opacity: 0.92;
+    }
+}
+
+.home-search{
+    background: $clr-white;
+    border-radius: 999px;
+    display: flex;
+    gap: 8px;
+    margin-top: 32px;
+    max-width: 720px;
+    padding: 8px;
+    box-shadow: rgba(0, 0, 0, 0.22) 0 18px 45px;
+
+    input{
+        flex: 1;
+        padding: 0 20px;
+        min-width: 0;
+    }
+
+    button{
+        background: $clr-purple;
+        color: $clr-white;
+        border-radius: 999px;
+        padding: 14px 28px;
+        font-family: $font-family-rubik;
+    }
+
+    @media screen and (max-width: 640px){
+        border-radius: 24px;
+        flex-direction: column;
+        input{ padding: 14px; }
+    }
+}
+
+.hero-actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.section-heading{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 24px;
+
+    h2{
+        color: $clr-dark-blue;
+        font-family: $font-family-rubik;
+        font-size: clamp(3rem, 5vw, 4.8rem);
+    }
+
+    @media screen and (max-width: 768px){
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+.tag-filters{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    button{
+        border: 1px solid rgba(130, 0, 221, 0.24);
+        border-radius: 999px;
+        color: $clr-mid-blue;
+        padding: 8px 16px;
+        transition: $transition;
+
+        &.active,
+        &:hover{
+            background: $clr-purple;
+            color: $clr-white;
         }
     }
-    .header-input-group{
-        margin-top: 32px;
-        position: relative;
-        .form-text{
-            position: absolute;
-            left: 1.6rem;
-            top: calc(100% + 6px);
-            color: $clr-danger;
-        }
-        .form-control{
-            padding: 18px;
-            border-radius: 6px 0 0 6px;
-            width: 400px;
-            &::placeholder{
-                font-family: $font-family-rubik;
-                font-weight: 300;
-                opacity: 0.8;
-            }
+}
 
-            @media screen and (max-width: 768px){
-                width: 300px;
-                font-size: 18px;
-                padding: 14px 16px;
-            }
-        }
-        .form-btn{
-            width: 60px;
-            border-radius: 0 6px 6px 0;
-            transition: $transition;
-            img{
-                width: 24px;
-            }
+.home-loading .loader{
+    margin: 32px auto;
+}
 
-            &:hover{
-                background-color: darken($clr-purple, 3%);
-            }
+.skeleton-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+
+    @media screen and (max-width: 900px){
+        grid-template-columns: 1fr;
+    }
+}
+
+.post-skeleton{
+    height: 320px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #edf0f7, #ffffff, #edf0f7);
+    background-size: 200% 100%;
+    animation: shimmer 1.25s infinite;
+}
+
+.pagination-controls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+
+    button{
+        border: 1px solid $clr-purple;
+        border-radius: 999px;
+        color: $clr-purple;
+        padding: 8px 18px;
+
+        &:disabled{
+            cursor: not-allowed;
+            opacity: 0.45;
         }
     }
+}
+
+@keyframes shimmer{
+    from{ background-position: 200% 0; }
+    to{ background-position: -200% 0; }
 }

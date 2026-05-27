@@ -1,18 +1,19 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState} from 'react';
 import "./LoginPage.scss";
-import AuthContext from '../../context/authContext';
-import axios from '../../api/axios';
-const LOGIN_URL = '/auth/login';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/authContext';
 
 const LoginPage = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { login, authLoading } = useAuthContext();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [loginData, setLoginData] = useState({
         username: "",
         password: "" 
     });
 
     const [errorMsg, setErrorMsg] = useState('');
-    const [success, setSuccess] = useState('');
+    const [successMsg, setSuccessMsg] = useState('');
 
     const formDataHandler = (event, property) => {
         setLoginData({
@@ -23,42 +24,21 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMsg('');
+        setSuccessMsg('');
 
         try{
-            const response = await axios.post(LOGIN_URL, JSON.stringify(loginData), {
-                headers: {'Content-Type': 'application/json'},
-            });
-
-            console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            const {user, pwd} = loginData;
-            setAuth({user, pwd, roles, accessToken});
-            setLoginData({
-                ...loginData,
-                username: "",
-                password: ""
-            });
-            setSuccess(true);
-            console.log(success);
+            await login({ username: loginData.username, password: loginData.password });
+            setLoginData({ username: "", password: "" });
+            setSuccessMsg('Login successful');
+            const redirectTo = location.state?.from?.pathname;
+            if(redirectTo){
+                navigate(redirectTo, { replace: true });
+            }
         } catch(err){
-            if(!err?.response){
-                setErrorMsg('No server response');
-            }
-            if(err.response?.status === 400){
-                setErrorMsg("Missing username or password");
-            }
-            if(err.response?.status === 401){
-                console.log("unauthorized entered");
-                setErrorMsg("Unauthorized");
-            } 
-            console.log(errorMsg);
+            setErrorMsg(err?.response?.data?.message || 'Unable to log in');
         }
     }
-
-    // useEffect(() => {
-    //     setErrorMsg('');
-    // }, [loginData]);
 
     return (
         <section className = "login">
@@ -67,20 +47,23 @@ const LoginPage = () => {
                     <div className='section-title'>
                         <h3>Login Here!</h3>
                     </div>
+                    {errorMsg && <p role="alert" className="form-text">{errorMsg}</p>}
+                    {successMsg && <p role="status" className="form-text">{successMsg}</p>}
                     <form onSubmit={handleSubmit}>
                         <div className='form-elem'>
                             <label htmlFor='username'>Username:</label>
-                            <input type = "text" id = "username" onChange = {(e) => formDataHandler(e, "username")} value = {loginData.username} required />
-                            <span className='form-text'>Username text</span>
+                            <input type = "text" id = "username" name="username" onChange = {(e) => formDataHandler(e, "username")} value = {loginData.username} required />
+                            <span className='form-text'>Enter your username or email.</span>
                         </div>
 
                         <div className='form-elem'>
                             <label htmlFor='password'>Password:</label>
-                            <input type = "password" id = "password" onChange={(e) => formDataHandler(e, "password")} value = {loginData.password} required />
-                            <span className='form-text'>Password text</span>
+                            <input type = "password" id = "password" name="password" onChange={(e) => formDataHandler(e, "password")} value = {loginData.password} required />
+                            <span className='form-text'>Enter your password.</span>
                         </div>
-                        <button>Login</button>
+                        <button disabled={authLoading}>{authLoading ? 'Logging in...' : 'Login'}</button>
                     </form>
+                    <p className="form-text">Need an account? <Link to="/register">Register</Link></p>
                 </div>
             </div>
         </section>
