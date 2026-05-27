@@ -1,36 +1,68 @@
 @import "../../App.scss";
 
 .navbar{
-    height: 80px;
+    min-height: 78px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: rgba(13, 23, 65, 0.12) 0 8px 26px;
+
     .navbar-brand{
-        &-icon{
-            margin-right: 5px;
-        }
+        &-icon{ margin-right: 6px; }
     }
 
     .navbar-row{
+        gap: 22px;
+
         .navbar-nav{
-            .nav-item{
-                margin-left: 36px;
+            gap: 24px;
+
+            .nav-link{
+                opacity: 0.88;
+                transition: $transition;
+
+                &.active,
+                &:hover{
+                    opacity: 1;
+                }
             }
 
-            @media screen and (max-width: 768px){
+            @media screen and (max-width: 900px){
                 display: none;
             }
         }
 
-        .vertical-line{
-            height: 30px;
-            width: 3px;
-            background-color: $clr-mid-purple;
-            margin-right: 24px;
-            margin-left: 24px;
+        .navbar-auth{
+            gap: 12px;
+
+            @media screen and (max-width: 760px){
+                display: none;
+            }
+        }
+
+        .navbar-user{
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .nav-auth-link{
+            font-size: 1.6rem;
+        }
+
+        .nav-auth-btn{
+            background: $clr-white;
+            border-radius: 999px;
+            color: $clr-purple;
+            font-family: $font-family-rubik;
+            font-size: 1.6rem;
+            padding: 8px 16px;
         }
 
         .sidebar-show-btn{
-            border-radius: 2px;
-            margin-left: 32px;
-            padding: 4px;
+            border-radius: 10px;
+            padding: 7px;
             border: 1px solid $clr-white;
             transition: $transition;
 

@@ -7,7 +7,19 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
+    "bcryptjs": "^3.0.3",
     "bootstrap": "^5.2.2",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "cross-env": "^7.0.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jest": "^27.5.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb-memory-server": "^10.3.0",
+    "mongoose": "^8.20.1",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -15,12 +27,20 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",
     "sass": "^1.55.0",
+    "slugify": "^1.6.9",
+    "supertest": "^7.2.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "client": "react-scripts start",
+    "server": "nodemon server/src/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "node server/src/seed/seed.js",
+    "test:server": "cross-env NODE_ENV=test jest --testEnvironment=node --runInBand server/tests",
+    "test:client": "react-scripts test --watchAll=false",
+    "test": "npm run test:server && npm run test:client",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,5 +60,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

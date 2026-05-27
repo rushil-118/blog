@@ -1,5 +1,21 @@
 @import "../../App.scss";
 
+.single-hero{
+    background: linear-gradient(135deg, $clr-dark-blue, $clr-mid-blue);
+    color: $clr-white;
+    padding: 72px 0;
+
+    h1{
+        font-family: $font-family-rubik;
+        font-size: clamp(3.2rem, 6vw, 6rem);
+        line-height: 1.1;
+        max-width: 980px;
+        margin-top: 10px;
+    }
+}
+
 .section-content{
-    padding: 40px;
+    border-radius: 20px;
+    padding: clamp(24px, 5vw, 56px);
+    box-shadow: rgba(73, 0, 155, 0.08) 0 18px 50px;
 }

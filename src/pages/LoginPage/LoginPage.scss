@@ -1,0 +1,72 @@
+@import "../../App.scss";
+
+.login,
+.auth-page{
+    background: $clr-light-blue;
+    min-height: 70vh;
+    padding: 72px 0;
+}
+
+.login-content,
+.auth-card{
+    background: $clr-white;
+    border-radius: 22px;
+    box-shadow: rgba(73, 0, 155, 0.08) 0 18px 50px;
+    margin: 0 auto;
+    max-width: 520px;
+    padding: clamp(24px, 5vw, 44px);
+
+    .section-title h3,
+    h1{
+        color: $clr-dark-blue;
+        font-family: $font-family-rubik;
+        font-size: 3.4rem;
+        margin-bottom: 20px;
+    }
+
+    form{
+        display: grid;
+        gap: 17px;
+    }
+
+    .form-elem{
+        display: grid;
+        gap: 8px;
+    }
+
+    label{
+        color: $clr-dark-blue;
+        font-family: $font-family-rubik;
+        font-weight: 600;
+    }
+
+    input{
+        border: 1px solid rgba(13, 23, 65, 0.12);
+        border-radius: 12px;
+        padding: 13px 14px;
+    }
+
+    button{
+        background: $clr-purple;
+        border-radius: 999px;
+        color: $clr-white;
+        padding: 11px 22px;
+    }
+}
+
+.form-text{
+    font-family: $font-family-rubik;
+    font-size: 1.4rem;
+}
+
+.form-error{
+    color: $clr-danger;
+    font-family: $font-family-rubik;
+    margin: 8px 0;
+}
+
+.auth-switch{
+    margin-top: 20px;
+
+    a{ color: $clr-purple; font-weight: 700; }
+}

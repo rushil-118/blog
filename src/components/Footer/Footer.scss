@@ -1,1 +1,33 @@
 @import "../../App.scss";
+
+.footer{
+    .footer-content{
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+
+        h2{
+            margin-bottom: 6px;
+        }
+
+        @media screen and (max-width: 700px){
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+
+    .footer-links{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-family: $font-family-rubik;
+    }
+
+    .copyright-text{
+        border-top: 1px solid rgba(255, 255, 255, 0.16);
+        margin-top: 24px;
+        padding-top: 18px;
+        opacity: 0.8;
+    }
+}

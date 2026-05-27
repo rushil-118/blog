@@ -1,0 +1,52 @@
+@import "../../App.scss";
+
+.post-editor-page{
+    min-height: 70vh;
+}
+
+.editor-shell{
+    background: $clr-white;
+    border-radius: 22px;
+    box-shadow: rgba(73, 0, 155, 0.08) 0 18px 50px;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: clamp(24px, 5vw, 48px);
+
+    h1{
+        color: $clr-dark-blue;
+        font-family: $font-family-rubik;
+        font-size: 4rem;
+        margin-bottom: 22px;
+    }
+}
+
+.post-editor-form{
+    display: grid;
+    gap: 18px;
+
+    .form-elem{
+        display: grid;
+        gap: 8px;
+    }
+
+    label{
+        color: $clr-dark-blue;
+        font-family: $font-family-rubik;
+        font-weight: 600;
+    }
+
+    input,
+    textarea{
+        border: 1px solid rgba(13, 23, 65, 0.12);
+        border-radius: 12px;
+        padding: 13px 14px;
+    }
+
+    button{
+        background: $clr-purple;
+        border-radius: 999px;
+        color: $clr-white;
+        justify-self: start;
+        padding: 11px 22px;
+    }
+}

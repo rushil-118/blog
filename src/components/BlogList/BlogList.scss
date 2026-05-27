@@ -1,84 +1,103 @@
 @import "../../App.scss";
 
 .blog-items{
-    row-gap: 32px;
+    gap: 28px;
+
     .blog-item{
         background-color: $clr-white;
-        box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 10px 0px;
-        border-radius: 6px;
-        padding: 36px 32px 32px 32px;
+        border: 1px solid rgba(13, 23, 65, 0.08);
+        border-radius: 20px;
+        box-shadow: rgba(73, 0, 155, 0.08) 0px 16px 40px;
+        overflow: hidden;
         transition: $transition;
+        display: flex;
+        flex-direction: column;
 
-        &-title{
-            margin-bottom: 8px;
-            line-height: 1.35;
+        &:hover{
+            transform: translateY(-6px);
+            box-shadow: rgba(73, 0, 155, 0.14) 0px 22px 50px;
         }
 
-        &-reaction{
-            margin-top: 12px;
+        &-cover{
+            height: 210px;
+            overflow: hidden;
 
-            .reaction-value{
-                margin-left: 6px;
-            }
-        }
-
-        &-tags{
-            margin-top: 12px;
-            &-single{
-                background-color: $clr-ex-blue;
-                color: $clr-white;
-                margin: 4px;
-                padding: 3px 12px;
-                border-radius: 5px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
+            img{
+                height: 100%;
+                object-fit: cover;
                 transition: $transition;
             }
         }
 
-        &-btn{
-            .read-more-btn{
-                display: inline-block;
-                margin-top: 18px;
-                padding: 4px 12px;
-                border: 1px solid $clr-ex-blue;
-                border-radius: 4px;
-                &:hover{
-                    transform: scale(0.95);
-                    transition: $transition;
-                    border-color: $clr-white;
-                }
+        &:hover &-cover img{
+            transform: scale(1.04);
+        }
+
+        &-body{
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 24px;
+        }
+
+        &-meta,
+        &-footer{
+            align-items: center;
+            color: rgba(86, 88, 114, 0.92);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 1.4rem;
+
+            span{
+                align-items: center;
+                display: inline-flex;
+                gap: 4px;
             }
         }
 
-        &:hover{
-            background-color: $clr-ex-blue;
-            color: $clr-white;
-            box-shadow: rgba(130, 0, 221, 0.15) 0px 7px 10px 0px;
+        &-title{
+            color: $clr-dark-blue;
+            display: inline-block;
+            line-height: 1.28;
+            margin: 14px 0 10px;
+        }
 
-            .blog-item-btn{
-                .read-more-btn{
-                    border-color: $clr-white;
-                }
-            }
+        &-text{
+            flex: 1;
+        }
 
-            .blog-item-tags{
-                &-single{
-                    background-color: $clr-white!important;
-                    color: $clr-purple;
-                }
+        &-tags{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+
+            &-single{
+                background-color: rgba(130, 0, 221, 0.09);
+                color: $clr-mid-blue;
+                padding: 4px 12px;
+                border-radius: 999px;
             }
+        }
+
+        &-footer{
+            border-top: 1px solid rgba(13, 23, 65, 0.08);
+            margin-top: 20px;
+            padding-top: 18px;
+        }
+
+        .read-more-btn{
+            color: $clr-purple;
+            margin-left: auto;
         }
     }
 
     @media screen and (min-width: 768px){
-        column-gap: 24px;
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media screen and (min-width: 992px){
-        column-gap: 24px;
+    @media screen and (min-width: 1100px){
         grid-template-columns: repeat(3, 1fr);
     }
 }
