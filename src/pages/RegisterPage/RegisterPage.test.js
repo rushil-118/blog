@@ -39,6 +39,7 @@ describe('RegisterPage', () => {
         userEvent.type(screen.getByLabelText(/^name$/i), 'Grace Hopper');
         userEvent.type(screen.getByLabelText(/username/i), 'grace');
         userEvent.type(screen.getByLabelText(/email/i), 'grace@example.com');
+        userEvent.type(screen.getByLabelText(/photo url/i), 'https://example.com/grace.jpg');
         userEvent.type(screen.getByLabelText(/password/i), 'password123');
         userEvent.click(screen.getByRole('button', { name: /register/i }));
 
@@ -46,6 +47,7 @@ describe('RegisterPage', () => {
             name: 'Grace Hopper',
             username: 'grace',
             email: 'grace@example.com',
+            avatar: 'https://example.com/grace.jpg',
             password: 'password123'
         }));
         await waitFor(() => expect(localStorage.getItem(AUTH_TOKEN_KEY)).toBe('register-token'));

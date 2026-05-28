@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import SingleBlogPage from './SingleBlogPage';
+import Comment from '../../components/Comment/Comment';
 import { AuthProvider, AUTH_TOKEN_KEY, AUTH_USER_KEY } from '../../context/authContext';
 import postsApi from '../../services/postsApi';
 import commentsApi from '../../services/commentsApi';
@@ -84,5 +85,27 @@ describe('SingleBlogPage workflows', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Token expired');
     expect(screen.getByText('Full post body')).toBeInTheDocument();
+  });
+
+  test('renders author and comment avatars only when provided', async() => {
+    postsApi.getPost.mockResolvedValueOnce({
+      post: {
+        id: 'p1',
+        slug: 'avatar-post',
+        title: 'Avatar Post',
+        body: 'Body',
+        author: { id: 'u1', name: 'Ada Lovelace', username: 'ada', avatar: 'https://example.com/ada.jpg' },
+        reactions: { likes: 0, dislikes: 0 }
+      },
+      comments: [{ id: 'c1', body: 'Comment with avatar', author: { username: 'grace', avatar: 'https://example.com/grace.jpg' } }]
+    });
+
+    renderDetail();
+
+    expect(await screen.findByRole('img', { name: 'Ada Lovelace' })).toHaveAttribute('src', 'https://example.com/ada.jpg');
+    expect(screen.getByRole('img', { name: 'grace' })).toHaveAttribute('src', 'https://example.com/grace.jpg');
+
+    const { container } = render(<Comment comment={{ id: 'c2', body: 'No avatar', author: { username: 'no-photo' } }} />);
+    expect(container.querySelector('img')).toBeNull();
   });
 });
