@@ -60,7 +60,6 @@ const seed = async () => {
       passwordHash,
       role: 'admin',
       bio: 'Editor of the demo blog.',
-      avatar: 'https://i.pravatar.cc/120?img=47',
     },
     {
       name: 'Riley Reader',
@@ -69,7 +68,6 @@ const seed = async () => {
       passwordHash,
       role: 'reader',
       bio: 'Curious reader and occasional writer.',
-      avatar: 'https://i.pravatar.cc/120?img=12',
     },
   ]);
 

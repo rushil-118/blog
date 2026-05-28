@@ -77,6 +77,15 @@ describe('auth', () => {
     expect(response.body.user.passwordHash).toBeUndefined();
   });
 
+  it('does not add a default avatar when registration omits a photo', async () => {
+    const response = await request(app)
+      .post('/api/auth/register')
+      .send({ name: 'No Photo', username: 'nophoto', email: 'nophoto@example.com', password: 'password123' })
+      .expect(201);
+
+    expect(response.body.user.avatar).toBeUndefined();
+  });
+
   it('rejects duplicate username or email registration', async () => {
     await registerUser({ username: 'duplicate', email: 'dupe@example.com' });
 

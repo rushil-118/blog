@@ -7,12 +7,13 @@ import Loader from '../Loader/Loader';
 import { useAuthContext } from '../../context/authContext';
 import formatDate from '../../utils/formatDate';
 import { canManagePost, getEntityId } from '../../utils/entity';
+import AuthorAvatar, { getAuthorName } from '../AuthorAvatar/AuthorAvatar';
 
 const PostMeta = ({author, blog, commentCount}) => (
   <div className='blog-info flex align-center'>
     <div className='blog-info-item flex align-center'>
       <BiUser className='text-mid-blue' />
-      <span className='blog-info-item-text font-rubik fw-5'>{author.name || author.username || 'Unknown author'}</span>
+      <span className='blog-info-item-text font-rubik fw-5'>{getAuthorName(author, 'Unknown author')}</span>
     </div>
     <div className='blog-info-item flex align-center'>
       <BiCalendar className='text-mid-blue' />
@@ -27,13 +28,9 @@ const PostMeta = ({author, blog, commentCount}) => (
 
 const AuthorCard = ({author}) => (
   <aside className='blog-author my-5'>
-    {author.avatar && (
-      <div className='blog-author-l'>
-        <img src = {author.avatar} alt = {author.name || author.username || 'Author'} />
-      </div>
-    )}
+    <AuthorAvatar author={author} fallback="Author" className="blog-author-l" />
     <div className='blog-author-r'>
-      <p className='fs-18 fw-6 author-name'>{author.name || author.username || 'Unknown author'}</p>
+      <p className='fs-18 fw-6 author-name'>{getAuthorName(author, 'Unknown author')}</p>
       {author.username && <p className='fs-16 author-username'>@{author.username}</p>}
       {author.bio && <p>{author.bio}</p>}
     </div>
