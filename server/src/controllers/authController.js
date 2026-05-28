@@ -2,18 +2,17 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { AppError, asyncHandler } = require('../middleware/error');
 const { signToken } = require('../utils/token');
-
-const normalize = (value) => (typeof value === 'string' ? value.trim() : '');
+const { normalizeString } = require('../utils/request');
 
 const sendAuthResponse = (res, user, statusCode = 200) => {
   res.status(statusCode).json({ token: signToken(user), user: user.toJSON() });
 };
 
 const register = asyncHandler(async (req, res) => {
-  const name = normalize(req.body.name);
-  const username = normalize(req.body.username).toLowerCase();
-  const email = normalize(req.body.email).toLowerCase();
-  const avatar = normalize(req.body.avatar);
+  const name = normalizeString(req.body.name);
+  const username = normalizeString(req.body.username).toLowerCase();
+  const email = normalizeString(req.body.email).toLowerCase();
+  const avatar = normalizeString(req.body.avatar);
   const password = typeof req.body.password === 'string' ? req.body.password : '';
 
   if (!username || !email || !password) {
@@ -36,7 +35,7 @@ const register = asyncHandler(async (req, res) => {
 });
 
 const login = asyncHandler(async (req, res) => {
-  const usernameOrEmail = normalize(req.body.username).toLowerCase();
+  const usernameOrEmail = normalizeString(req.body.username).toLowerCase();
   const password = typeof req.body.password === 'string' ? req.body.password : '';
 
   if (!usernameOrEmail || !password) {
