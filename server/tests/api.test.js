@@ -69,11 +69,11 @@ describe('auth', () => {
   it('registers a user and returns a token without passwordHash', async () => {
     const response = await request(app)
       .post('/api/auth/register')
-      .send({ name: 'Ada Lovelace', username: 'ada', email: 'ada@example.com', password: 'password123' })
+      .send({ name: 'Ada Lovelace', username: 'ada', email: 'ada@example.com', avatar: 'https://example.com/ada.jpg', password: 'password123' })
       .expect(201);
 
     expect(response.body.token).toBeTruthy();
-    expect(response.body.user).toMatchObject({ username: 'ada', email: 'ada@example.com', name: 'Ada Lovelace' });
+    expect(response.body.user).toMatchObject({ username: 'ada', email: 'ada@example.com', name: 'Ada Lovelace', avatar: 'https://example.com/ada.jpg' });
     expect(response.body.user.passwordHash).toBeUndefined();
   });
 

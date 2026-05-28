@@ -13,6 +13,7 @@ const register = asyncHandler(async (req, res) => {
   const name = normalize(req.body.name);
   const username = normalize(req.body.username).toLowerCase();
   const email = normalize(req.body.email).toLowerCase();
+  const avatar = normalize(req.body.avatar);
   const password = typeof req.body.password === 'string' ? req.body.password : '';
 
   if (!username || !email || !password) {
@@ -29,7 +30,7 @@ const register = asyncHandler(async (req, res) => {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await User.create({ name, username, email, passwordHash });
+  const user = await User.create({ name, username, email, ...(avatar ? { avatar } : {}), passwordHash });
 
   sendAuthResponse(res, user, 201);
 });

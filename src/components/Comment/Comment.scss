@@ -4,9 +4,14 @@
     border: 1.5px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
     padding: 16px;
+    gap: 16px;
 
     @media screen and (min-width: 400px){
-        grid-template-columns: 100px auto;
+        grid-template-columns: auto;
+
+        &.has-avatar{
+            grid-template-columns: 100px auto;
+        }
     }
     .comment-img{
         width: 80px;

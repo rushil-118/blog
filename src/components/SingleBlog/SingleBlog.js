@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import "./SingleBlog.scss";
 import {BiCalendar, BiCommentDots, BiDislike, BiLike, BiUser} from 'react-icons/bi';
-import authorImg from "../../assets/images/author.png";
 import Comment from '../Comment/Comment';
 import {Link} from "react-router-dom";
 import Loader from '../Loader/Loader';
@@ -28,9 +27,11 @@ const PostMeta = ({author, blog, commentCount}) => (
 
 const AuthorCard = ({author}) => (
   <aside className='blog-author my-5'>
-    <div className='blog-author-l'>
-      <img src = {author.avatar || authorImg} alt = "" />
-    </div>
+    {author.avatar && (
+      <div className='blog-author-l'>
+        <img src = {author.avatar} alt = {author.name || author.username || 'Author'} />
+      </div>
+    )}
     <div className='blog-author-r'>
       <p className='fs-18 fw-6 author-name'>{author.name || author.username || 'Unknown author'}</p>
       {author.username && <p className='fs-16 author-username'>@{author.username}</p>}

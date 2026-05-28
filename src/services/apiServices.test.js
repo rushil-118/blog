@@ -22,7 +22,7 @@ describe('API services request shape', () => {
     });
 
     test('authApi.register posts account details to the backend register endpoint', async() => {
-        const details = { name: 'Ada Lovelace', username: 'ada', email: 'ada@example.com', password: 'password123' };
+        const details = { name: 'Ada Lovelace', username: 'ada', email: 'ada@example.com', avatar: 'https://example.com/ada.jpg', password: 'password123' };
         api.post.mockResolvedValue({ data: { token: 'token', user: { username: 'ada' } } });
 
         await expect(authApi.register(details)).resolves.toEqual({ token: 'token', user: { username: 'ada' } });
